@@ -18,7 +18,7 @@
 
 #define ror64_16(x) _mm_shuffle_epi8((x), r16)
 #define ror64_24(x) _mm_shuffle_epi8((x), r24)
-#define ror64_32(x) _mm_shuffle_epi32((x), _MM_SHUFFLE(0, 1, 2, 3))
+#define ror64_32(x) _mm_shuffle_epi32((x), _MM_SHUFFLE(2, 3, 0, 1))
 #define ror64_63(x) \
     _mm_xor_si128(_mm_srli_epi64((x), 63), _mm_add_epi64((x), (x)))
 
