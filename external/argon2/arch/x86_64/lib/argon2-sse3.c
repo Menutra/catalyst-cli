@@ -19,8 +19,7 @@
 #define ror64_16(x) _mm_shuffle_epi8((x), r16)
 #define ror64_24(x) _mm_shuffle_epi8((x), r24)
 #define ror64_32(x) _mm_shuffle_epi32((x), _MM_SHUFFLE(2, 3, 0, 1))
-#define ror64_63(x) \
-    _mm_xor_si128(_mm_srli_epi64((x), 63), _mm_add_epi64((x), (x)))
+    _mm_xor_si128(_mm_srli_epi64((x), 31), _mm_add_epi64((x), (x)))
 
 static __m128i f(__m128i x, __m128i y)
 {
@@ -66,8 +65,8 @@ static __m128i f(__m128i x, __m128i y)
         B0 = _mm_xor_si128(B0, C0); \
         B1 = _mm_xor_si128(B1, C1); \
 \
-        B0 = ror64_63(B0); \
-        B1 = ror64_63(B1); \
+        B0 = ror64_32(B0); \
+        B1 = ror64_32(B1); \
     } while ((void)0, 0)
 
 #define DIAGONALIZE(A0, B0, C0, D0, A1, B1, C1, D1) \
