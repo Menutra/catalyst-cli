@@ -46,21 +46,7 @@ namespace System
                     message = "setsockopt failed, " + lastErrorMessage();
                 }
                 else
-                {
-                    sockaddr_in address;
-                    address.sin_family = AF_INET;
-                    address.sin_port = htons(port);
-                    address.sin_addr.s_addr = htonl(addr.getValue());
-                    if (bind(listener, reinterpret_cast<sockaddr *>(&address), sizeof address) != 0)
-                    {
-                        message = "bind failed, " + lastErrorMessage();
-                    }
-                    else if (listen(listener, SOMAXCONN) != 0)
-                    {
-                        message = "listen failed, " + lastErrorMessage();
-                    }
-                    else
-                    {
+                   {
                         epoll_event listenEvent;
                         listenEvent.events = EPOLLONESHOT;
                         listenEvent.data.ptr = nullptr;
